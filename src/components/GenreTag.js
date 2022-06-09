@@ -98,3 +98,5 @@ GenreTag.propTypes = {
   checkHandler: PropTypes.func.isRequired,
   performable: PropTypes.bool.isRequired,
 }
+
+export default GenreTag

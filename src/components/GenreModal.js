@@ -7,7 +7,7 @@ class GenreModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      genreList: this.props.genrelist
+      genreList: this.props.genreList
     }
   }
 
@@ -95,7 +95,7 @@ class GenreModal extends React.Component {
             <div className="mdc-dialog__actions">
               <button type="button"
                       className="mdc-button mdc-dialog__button"
-                      onClick={() => this.demoDatenLaden()}>
+                      onClick={() => this.loadDemo()}>
                 <div className="mdc-button__ripple"></div>
                 <span className="mdc-button__label">Demo</span>
               </button>
@@ -118,4 +118,4 @@ GenreModal.propTypes = {
   onDialogClose: PropTypes.func.isRequired
 }
 
-export default
+export default GenreModal

@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Modell from "../model/Repertoire"
 
 /**
@@ -86,6 +87,10 @@ class SortingModal extends React.Component {
       </div>
     )
   }
+}
+
+SortingModal.propTypes = {
+  onDialogClose: PropTypes.func.isRequired
 }
 
 export default SortingModal

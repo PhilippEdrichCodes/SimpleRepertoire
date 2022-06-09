@@ -39,7 +39,8 @@ class SongTag extends React.Component {
    */
   renameSong (song, event) {
     if (event && event.key !== "Enter") return
-    this.props.genre.renameSong(song.name, event.target.value)
+    Modell.activeGenre = this.props.genre
+    Modell.activeGenre.renameSong(song.name, event.target.value)
     this.state({isEditing: false})
   }
 
@@ -81,7 +82,7 @@ class SongTag extends React.Component {
         <i className="material-icons"
            onClick={() => this.setState({isEditing: false})}>cancel </i>
         <i className="material-icons"
-           onClick={() => this.renameSong(song)}>check_circle </i>
+           onClick={event => this.renameSong(song, event)}>check_circle </i>
       </dd>
     )
 
@@ -94,7 +95,7 @@ class SongTag extends React.Component {
 }
 
 SongTag.propTypes = {
-  lied: PropTypes.object.isRequired,
+  song: PropTypes.object.isRequired,
   genre: PropTypes.object.isRequired,
   checkHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
