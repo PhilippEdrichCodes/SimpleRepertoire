@@ -45,11 +45,11 @@ h2, dd {
   padding:          0.3rem;
 }
 
-.aktiv {
+.active {
   background-color: chocolate
 }
 
-.inaktiv {
+.inactive {
   background-color: cornflowerblue
 }
 

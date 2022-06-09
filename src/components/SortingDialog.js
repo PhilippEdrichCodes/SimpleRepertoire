@@ -32,39 +32,53 @@ class SortingDialog extends React.Component {
 
             <div className="mdc-dialog__content">
               <ul className="mdc-deprecated-list" onChange={e => this.handleChange(e)}>
-                <li><label htmlFor="eigene">
-                  <input type="radio" id="eigene" name="Sortierung" value={sortKeys[0]}
+                <li>
+                  <label htmlFor="initial">
+                  <input type="radio"
+                         id="initial"
+                         name="sorting"
+                         value={sortKeys[0]}
                          defaultChecked={this.state.sortingOrder === sortKeys[0]}/>
                   {sortKeys[0]}
-                </label>
+                  </label>
                 </li>
                 <hr/>
-                <li><label htmlFor="auf">
-                  <input type="radio" id="auf" name="Sortierung" value={sortKeys[1]}
+                <li>
+                  <label htmlFor="up">
+                  <input type="radio"
+                         id="up"
+                         name="sorting"
+                         value={sortKeys[1]}
                          defaultChecked={this.state.sortingOrder === sortKeys[1]}/>
                   {sortKeys[1]}
-                </label>
+                  </label>
                 </li>
-                <li><label htmlFor="ab">
-                  <input type="radio" id="ab" name="Sortierung" value={sortKeys[2]}
+                <li>
+                  <label htmlFor="down">
+                  <input type="radio"
+                         id="down"
+                         name="sorting"
+                         value={sortKeys[2]}
                          defaultChecked={this.state.sortingOrder === sortKeys[2]}/>
                   {sortKeys[2]}
-                </label>
+                  </label>
                 </li>
               </ul>
             </div>
 
             <div className="mdc-dialog__actions">
-              <button type="button" className="mdc-button mdc-button--raised"
+              <button type="button"
+                      className="mdc-button mdc-button--raised"
                       onClick={() => this.props.onDialogClose(this.state.sortingOrder, false)}>
                 <div className="mdc-button__ripple"></div>
                 <span className="mdc-button__label">Abbrechen</span>
               </button>
               &nbsp;
-              <button type="button" className="mdc-button mdc-button--raised"
+              <button type="button"
+                      className="mdc-button mdc-button--raised"
                       onClick={() => this.props.onDialogClose(this.state.sortingOrder, true)}>
                 <div className="mdc-button__ripple"></div>
-                <span className="mdc-button__label">OK</span>
+                <span className="mdc-button__label">Sortieren</span>
               </button>
             </div>
           </div>
