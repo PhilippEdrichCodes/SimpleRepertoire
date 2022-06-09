@@ -6,7 +6,7 @@ import Modell from "../model/Repertoire"
  * @component
  */
 
-class SortingDialog extends React.Component {
+class SortingModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -88,4 +88,4 @@ class SortingDialog extends React.Component {
   }
 }
 
-export default SortingDialog
+export default SortingModal

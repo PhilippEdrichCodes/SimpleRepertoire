@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import Modell from "../model/Repertoire"
 
 
 /**
@@ -32,12 +33,13 @@ class SongTag extends React.Component {
 
   /**
    * Renames a song according to user input
-   * @param song
-   * @param event
+   * Uses {@link Genre.renameSong} to achieve this
+   * @param {Song} song - the song to rename
+   * @param {Event.KEYUP} event - the triggering event
    */
   renameSong (song, event) {
     if (event && event.key !== "Enter") return
-    song.name = this.state.newName
+    this.props.genre.renameSong(song.name, event.target.value)
     this.state({isEditing: false})
   }
 
@@ -45,20 +47,20 @@ class SongTag extends React.Component {
 
     const song = this.props.song
     let songName = song.name
-    if (song.isInSet) {
+    if (song.stageable) {
       songName = <em>{song.name}</em>
     }
 
-    //put song in set-list and out of it
+    //allows putting the song in set-list and out of it
     const viewTemplate = (
       <dd>
         <label>
           <input type="checkbox"
-                 checked={song.isInSet}
+                 checked={song.stageable}
                  onChange={() => this.props.checkHandler(song)}/>
           {songName}
         </label>
-        {!song.isInSet ?
+        {!song.stageable ?
           <i className="material-icons"
              onClick={() => this.setState({isEditing: true})}>
             edit

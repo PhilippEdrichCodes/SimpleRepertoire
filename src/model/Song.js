@@ -1,7 +1,7 @@
 /**
  * This class represents a Song
  *
- * @property {Number}  counter - used to provide unigue IDs
+ * @property {Number}  counter - used to provide unique IDs
  * @property {Number}  id      - unique ID
  * @property {Number}  index   - position in List
  * @property {String}  name    - name of this song
@@ -13,13 +13,13 @@ class Song {
   id
   name
   index
-  isInSet
+  stageable
 
   constructor (name, index) {
     this.id = Song.counter++
     this.name = name
     this.index = index
-    this.isInSet = false
+    this.stageable = false
   }
 }
 

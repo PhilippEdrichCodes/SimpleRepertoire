@@ -1,8 +1,19 @@
-import PropTypes from "prop-types"
 import React from "react"
+import PropTypes from "prop-types"
 import Modell from "../model/Repertoire"
 import SongTag from "./SongTag"
 
+/**
+ * This component represents a genre and implements the JSX to show it in the App
+ *
+ * @component entry (dt in dl in section) ToDo: ausformulieren
+ *
+ * @property {Genre} genre - the genre to display
+ * @property {boolean} active - sets this genre as `activeGenre` in the {@link App}
+ * @property {boolean} performable - toggles in which section the songs are displayed
+ * @property {Function} activeGenreHandler - handler to set this genre as `activeGenre` in the {@link App}
+ * @property {Function} checkHandler - controls in which list the songs displayed
+ */
 class GenreTag extends React.Component {
   constructor (props) {
     super(props)
@@ -11,18 +22,36 @@ class GenreTag extends React.Component {
     }
   }
 
+  /**
+   * After the component did mount completely, the state is loaded form {@link localStorage}
+   */
+  componentDidMount () {
+    let open = localStorage.getItem("genre-" + this.props.genre.id)
+    open = (open === null) ? true : JSON.parse(open)
+    this.setState({open: open})
+  }
+
+  /**
+   * Allows deleting a song
+   * Uses {@link Genre.deleteSong}
+   * Requires confirmation by a popup
+   * @param name
+   */
   deleteSong (name) {
-    this.props.genre.deleteSong(name)
+    if (window.confirm("Wollen Sie diesen Eintrag wirklich löschen?!")) {
+      this.props.genre.deleteSong(name)
+      Modell.informAndSave("[Gruppe] Artikel " + name + " wurde gelöscht")
+    }
     this.props.activeGenreHandler(this.props.genre)
-    Modell.informAndSave("[Gruppe] Artikel " + name + " wurde gelöscht")
+
     this.forceUpdate()
   }
 
-  openClose() {
+  openClose () {
     this.setState({open: !this.state.open})
   }
 
-  render() {
+  render () {
     const genre = this.props.genre
 
     let genreHeader = (
@@ -41,7 +70,7 @@ class GenreTag extends React.Component {
     let songArray = []
     if (this.state.open) {
       for (const song of genre.songList) {
-        if (song.isInSet === this.props.isInSet) {
+        if (song.stageable === this.props.stageable) {
           songArray.push(
             <SongTag lied={song}
                      genre={genre}
@@ -63,9 +92,9 @@ class GenreTag extends React.Component {
 }
 
 GenreTag.propTypes = {
-  aktiv: PropTypes.bool,
-  aktivesGenreHandler: PropTypes.func.isRequired,
-  checkHandler: PropTypes.func.isRequired,
-  geprobt: PropTypes.bool.isRequired,
   genre: PropTypes.object.isRequired,
+  active: PropTypes.bool,
+  activeGenreHandler: PropTypes.func.isRequired,
+  checkHandler: PropTypes.func.isRequired,
+  performable: PropTypes.bool.isRequired,
 }
